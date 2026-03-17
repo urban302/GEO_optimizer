@@ -1,12 +1,12 @@
 <?php
 /**
  * Plugin Name: GEO Optimizer
- * Plugin URI:  https://example.com/geo-optimizer
- * Description: Generative Engine Optimization — optimize your WordPress content for AI-powered search engines.
+ * Plugin URI:  https://www.erwinverbeek.nl/geo-optimizer/
+ * Description: Maak je WordPress website vindbaar voor AI-zoekmachines zoals ChatGPT, Perplexity en Google AI Overviews.
  * Version:     1.0.0
  * Requires PHP: 8.0
- * Author:      GEO Optimizer
- * Author URI:  https://example.com
+ * Author:      Erwin Verbeek
+ * Author URI:  https://www.erwinverbeek.nl
  * License:     GPL-2.0-or-later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: geo-optimizer
