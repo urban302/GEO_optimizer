@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: GEO Optimizer
+ * Plugin Name: GEORank
  * Plugin URI:  https://www.erwinverbeek.nl/geo-optimizer/
  * Description: Maak je WordPress website vindbaar voor AI-zoekmachines zoals ChatGPT, Perplexity en Google AI Overviews.
  * Version:     1.0.0

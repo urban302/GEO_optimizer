@@ -1,4 +1,4 @@
-=== GEO Optimizer ===
+=== GEORank ===
 Contributors: erwinverbeek
 Tags: geo, schema, structured data, ai seo, llms.txt
 Requires at least: 6.0
@@ -12,7 +12,7 @@ Make your WordPress website visible to AI search engines like ChatGPT, Perplexit
 
 == Description ==
 
-GEO Optimizer helps you optimize your WordPress website for Generative Engine Optimization (GEO) — the new standard for visibility in AI search engines like ChatGPT Search, Perplexity, Google AI Overviews and other AI assistants.
+GEORank helps you optimize your WordPress website for Generative Engine Optimization (GEO) — the new standard for visibility in AI search engines like ChatGPT Search, Perplexity, Google AI Overviews and other AI assistants.
 
 Traditionele SEO zorgt dat je gevonden wordt in Google. GEO zorgt
 dat AI-systemen jouw content begrijpen, citeren en aanbevelen.
@@ -46,7 +46,7 @@ door je hele site.
 More than 30% of informational search queries now end at an
 AI answer instead of a traditional search results page.
 Websites that are not GEO-optimized miss this visibility entirely.
-GEO Optimizer is the first WordPress plugin focused exclusively
+GEORank is the first WordPress plugin focused exclusively
 on AI search engine optimization.
 
 = Works with =
@@ -59,7 +59,7 @@ on AI search engine optimization.
 
 = About the developer =
 
-GEO Optimizer was developed by Erwin Verbeek, SEO specialist with
+GEORank was developed by Erwin Verbeek, SEO specialist with
 20+ years of experience and expert in GEO and AI-driven search engine
 optimization. More information at
 [erwinverbeek.nl/geo-optimizer](https://www.erwinverbeek.nl/geo-optimizer/).
@@ -68,7 +68,7 @@ optimization. More information at
 
 1. Upload de `geo-optimizer` map naar `/wp-content/plugins/`
 2. Activeer de plugin via het 'Plugins' menu in WordPress
-3. Ga naar Instellingen > GEO Optimizer
+3. Ga naar Instellingen > GEORank
 4. Vul je organisatiegegevens in op het tabblad "Organisatie"
 5. Controleer je /llms.txt via jouwsite.nl/llms.txt
 
@@ -76,7 +76,7 @@ optimization. More information at
 
 = Werkt deze plugin samen met RankMath of Yoast? =
 
-Ja. GEO Optimizer detecteert automatisch of RankMath of Yoast
+Yes. GEORank detecteert automatisch of RankMath of Yoast
 actief is. De schema markup output wordt dan uitgeschakeld om
 conflicten te voorkomen. De llms.txt generator en GEO Score
 werken altijd, ongeacht andere SEO plugins.
@@ -96,7 +96,7 @@ citeren en aanbevelen in hun antwoorden.
 
 = Heeft de plugin een Pro versie? =
 
-Ja. GEO Optimizer Pro bevat AI-powered content analyse,
+Ja. GEORank Pro bevat AI-powered content analyse,
 automatische FAQ suggesties, citeer-score per pagina
 en competitor gap analyse. Meer informatie op
 erwinverbeek.nl/geo-optimizer/
@@ -127,4 +127,4 @@ gegenereerd op basis van core/details blokken in Gutenberg.
 == Upgrade Notice ==
 
 = 1.0.0 =
-Initial release van GEO Optimizer.
+Initial release of GEORank.
