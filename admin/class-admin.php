@@ -1,6 +1,6 @@
 <?php
 /**
- * Admin — dashboard page, settings page, and asset loading.
+ * Admin — dashboard page and plugin action links.
  *
  * @package GEO_Optimizer
  */
@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Handles admin menu pages, settings registration, and asset enqueuing.
+ * Handles the top-level GEO Optimizer dashboard menu page.
  */
 class Admin {
 
@@ -22,16 +22,14 @@ class Admin {
 	 * Register hooks.
 	 */
 	public function register(): void {
-		add_action( 'admin_menu', [ $this, 'add_menu_pages' ] );
-		add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_settings_assets' ] );
+		add_action( 'admin_menu', [ $this, 'add_menu_page' ] );
 		add_filter( 'plugin_action_links_' . GEO_OPTIMIZER_BASENAME, [ $this, 'add_settings_link' ] );
 	}
 
 	/**
-	 * Register the admin menu pages.
+	 * Register the top-level dashboard page.
 	 */
-	public function add_menu_pages(): void {
-		// Top-level dashboard page.
+	public function add_menu_page(): void {
 		add_menu_page(
 			__( 'GEO Optimizer', 'geo-optimizer' ),
 			__( 'GEO Optimizer', 'geo-optimizer' ),
@@ -40,37 +38,6 @@ class Admin {
 			[ $this, 'render_dashboard' ],
 			'dashicons-chart-area',
 			80
-		);
-
-		// Settings page under Instellingen.
-		add_options_page(
-			__( 'GEO Optimizer — Instellingen', 'geo-optimizer' ),
-			__( 'GEO Optimizer', 'geo-optimizer' ),
-			'manage_options',
-			'geo-optimizer-settings',
-			[ $this, 'render_settings' ]
-		);
-	}
-
-	/**
-	 * Enqueue CSS and JS for the settings page.
-	 *
-	 * @param string $hook_suffix Current admin page hook suffix.
-	 */
-	public function enqueue_settings_assets( string $hook_suffix ): void {
-		if ( 'settings_page_geo-optimizer-settings' !== $hook_suffix ) {
-			return;
-		}
-
-		// WordPress media uploader.
-		wp_enqueue_media();
-
-		wp_enqueue_script(
-			'geo-optimizer-admin-settings',
-			GEO_OPTIMIZER_URL . 'assets/js/admin-settings.js',
-			[ 'jquery', 'media-upload', 'thickbox' ],
-			GEO_OPTIMIZER_VERSION,
-			true
 		);
 	}
 
@@ -92,12 +59,5 @@ class Admin {
 	 */
 	public function render_dashboard(): void {
 		require_once GEO_OPTIMIZER_PATH . 'admin/views/dashboard.php';
-	}
-
-	/**
-	 * Render the settings page.
-	 */
-	public function render_settings(): void {
-		require_once GEO_OPTIMIZER_PATH . 'admin/views/settings.php';
 	}
 }

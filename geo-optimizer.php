@@ -31,7 +31,7 @@ require_once GEO_OPTIMIZER_PATH . 'includes/class-schema-manager.php';
 require_once GEO_OPTIMIZER_PATH . 'includes/class-llms-txt.php';
 require_once GEO_OPTIMIZER_PATH . 'includes/class-geo-score.php';
 require_once GEO_OPTIMIZER_PATH . 'admin/class-admin.php';
-require_once GEO_OPTIMIZER_PATH . 'admin/class-settings.php';
+require_once GEO_OPTIMIZER_PATH . 'admin/class-settings-page.php';
 
 /**
  * Boot the plugin after all plugins are loaded.
@@ -47,8 +47,8 @@ function geo_optimizer_init(): void {
 		$geo_score = new GEO_Optimizer\Geo_Score();
 		$geo_score->register();
 
-		$settings = new GEO_Optimizer\Settings();
-		$settings->register();
+		$settings_page = new GEO_Optimizer\Settings_Page();
+		$settings_page->register();
 
 		$admin = new GEO_Optimizer\Admin();
 		$admin->register();
