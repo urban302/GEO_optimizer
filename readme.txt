@@ -100,8 +100,8 @@ citeren en aanbevelen in hun antwoorden.
 
 = Heeft de plugin een Pro versie? =
 
-Ja. GEO Optimizer Pro bevat AI-powered content analyse via de
-AI-powered content analyse, automatische FAQ suggesties, citeer-score per pagina
+Ja. GEO Optimizer Pro bevat AI-powered content analyse,
+automatische FAQ suggesties, citeer-score per pagina
 en competitor gap analyse. Meer informatie op
 erwinverbeek.nl/geo-optimizer/
 
