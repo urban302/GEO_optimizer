@@ -15,6 +15,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Outputs JSON-LD schema markup in wp_head based on post type and content.
+ *
+ * All individual schemas are collected into a single @graph array to produce
+ * one cohesive JSON-LD block per page.
  */
 class Schema_Manager {
 
@@ -64,50 +67,112 @@ class Schema_Manager {
 			return;
 		}
 
-		$schemas = [];
+		// Never output schema on 404 pages.
+		if ( is_404() ) {
+			return;
+		}
+
+		$graph = [];
 
 		// Organization schema on every page.
-		$schemas[] = $this->get_organization_schema();
+		$graph[] = $this->get_organization_schema();
+
+		// WebPage schema for every valid page.
+		$graph[] = $this->get_webpage_schema();
 
 		if ( is_singular( 'post' ) ) {
-			$schemas[] = $this->get_article_schema();
-			$schemas[] = $this->get_person_schema();
-
-			$faq = $this->get_faq_schema();
-			if ( $faq ) {
-				$schemas[] = $faq;
-			}
+			$graph[] = $this->get_article_schema();
+			$graph[] = $this->get_person_schema();
+			$graph[] = $this->get_faq_schema();
 		}
 
 		if ( is_singular( 'page' ) ) {
-			$faq = $this->get_faq_schema();
-			if ( $faq ) {
-				$schemas[] = $faq;
-			}
+			$graph[] = $this->get_faq_schema();
 		}
+
+		// Remove null / empty entries before output.
+		$graph = array_values( array_filter( $graph ) );
 
 		/**
-		 * Filter the JSON-LD schemas before output.
+		 * Filter the @graph schemas before output.
 		 *
-		 * @param array[] $schemas Array of schema arrays.
+		 * @param array[] $graph Array of schema arrays.
 		 */
-		$schemas = apply_filters( 'geo_optimizer_schemas', array_filter( $schemas ) );
+		$graph = apply_filters( 'geo_optimizer_schemas', $graph );
 
-		foreach ( $schemas as $schema ) {
-			$this->print_json_ld( $schema );
+		if ( empty( $graph ) ) {
+			return;
 		}
+
+		$this->print_json_ld( [
+			'@context' => 'https://schema.org',
+			'@graph'   => $graph,
+		] );
+	}
+
+	// -------------------------------------------------------------------------
+	// Schema builders
+	// -------------------------------------------------------------------------
+
+	/**
+	 * Build the WebPage schema for the current request.
+	 *
+	 * @return array<string, mixed>|null
+	 */
+	private function get_webpage_schema(): ?array {
+		$schema = [
+			'@type' => 'WebPage',
+			'url'   => $this->get_current_url(),
+		];
+
+		// Only fetch post data on singular pages.
+		if ( is_singular() ) {
+			$post = get_queried_object();
+
+			if ( $post instanceof \WP_Post ) {
+				$schema['name']          = get_the_title( $post );
+				$schema['description']   = $this->get_meta_description( $post );
+				$schema['datePublished'] = get_the_date( 'c', $post );
+				$schema['dateModified']  = get_the_modified_date( 'c', $post );
+				$schema['isPartOf']      = [
+					'@type' => 'WebSite',
+					'name'  => get_bloginfo( 'name' ),
+					'url'   => home_url( '/' ),
+				];
+			}
+		} elseif ( is_front_page() ) {
+			$schema['name']        = get_bloginfo( 'name' );
+			$schema['description'] = get_bloginfo( 'description' );
+		}
+
+		// Add SearchAction on the homepage.
+		if ( is_front_page() ) {
+			$schema['potentialAction'] = [
+				'@type'       => 'SearchAction',
+				'target'      => [
+					'@type'        => 'EntryPoint',
+					'urlTemplate'  => home_url( '/?s={search_term_string}' ),
+				],
+				'query-input' => 'required name=search_term_string',
+			];
+		}
+
+		return $schema;
 	}
 
 	/**
 	 * Build the Article schema for the current post.
 	 *
-	 * @return array<string, mixed>
+	 * @return array<string, mixed>|null
 	 */
-	private function get_article_schema(): array {
-		$post = get_post();
+	private function get_article_schema(): ?array {
+		$post = get_queried_object();
+
+		if ( ! $post instanceof \WP_Post ) {
+			return null;
+		}
 
 		return [
-			'@context'      => 'https://schema.org',
 			'@type'         => 'Article',
 			'headline'      => get_the_title( $post ),
 			'description'   => $this->get_meta_description( $post ),
@@ -132,10 +197,9 @@ class Schema_Manager {
 	 */
 	private function get_organization_schema(): array {
 		$schema = [
-			'@context' => 'https://schema.org',
-			'@type'    => 'Organization',
-			'name'     => get_bloginfo( 'name' ),
-			'url'      => home_url( '/' ),
+			'@type' => 'Organization',
+			'name'  => get_bloginfo( 'name' ),
+			'url'   => home_url( '/' ),
 		];
 
 		$custom_logo_id = get_theme_mod( 'custom_logo' );
@@ -152,38 +216,39 @@ class Schema_Manager {
 	/**
 	 * Build the Person schema for the current post author.
 	 *
-	 * @return array<string, mixed>
+	 * @return array<string, mixed>|null
 	 */
-	private function get_person_schema(): array {
-		$post      = get_post();
+	private function get_person_schema(): ?array {
+		$post = get_queried_object();
+
+		if ( ! $post instanceof \WP_Post ) {
+			return null;
+		}
+
 		$author_id = (int) $post->post_author;
 
-		$schema = [
-			'@context'    => 'https://schema.org',
+		return [
 			'@type'       => 'Person',
 			'name'        => get_the_author_meta( 'display_name', $author_id ),
 			'description' => get_the_author_meta( 'description', $author_id ),
 			'url'         => get_author_posts_url( $author_id ),
 		];
-
-		return $schema;
 	}
 
 	/**
-	 * Build FAQPage schema from FAQ blocks or shortcodes in the current post.
-	 *
-	 * Looks for:
-	 *  - Gutenberg core/heading + core/paragraph pairs with question-style headings.
-	 *  - Content between <h2>/<h3> tags that end with a question mark.
+	 * Build FAQPage schema from headings that end with a question mark.
 	 *
 	 * @return array<string, mixed>|null
 	 */
 	private function get_faq_schema(): ?array {
-		$post    = get_post();
-		$content = $post->post_content;
+		$post = get_queried_object();
 
-		// Extract question/answer pairs from headings ending with "?".
-		$pairs = [];
+		if ( ! $post instanceof \WP_Post ) {
+			return null;
+		}
+
+		$content = $post->post_content;
+		$pairs   = [];
 
 		if ( preg_match_all(
 			'/<h[2-3][^>]*>(.+?\?)<\/h[2-3]>\s*(<p[^>]*>.+?<\/p>)/si',
@@ -208,11 +273,14 @@ class Schema_Manager {
 		}
 
 		return [
-			'@context'   => 'https://schema.org',
 			'@type'      => 'FAQPage',
 			'mainEntity' => $pairs,
 		];
 	}
+
+	// -------------------------------------------------------------------------
+	// Helpers
+	// -------------------------------------------------------------------------
 
 	/**
 	 * Get a meta description for the post (excerpt fallback).
@@ -228,6 +296,20 @@ class Schema_Manager {
 		}
 
 		return wp_trim_words( wp_strip_all_tags( $post->post_content ), 30, '…' );
+	}
+
+	/**
+	 * Get the URL for the current request.
+	 */
+	private function get_current_url(): string {
+		if ( is_singular() ) {
+			$obj = get_queried_object();
+			if ( $obj instanceof \WP_Post ) {
+				return (string) get_permalink( $obj );
+			}
+		}
+
+		return home_url( add_query_arg( [] ) );
 	}
 
 	/**
