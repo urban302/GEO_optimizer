@@ -30,8 +30,21 @@ define( 'GEO_OPTIMIZER_BASENAME', plugin_basename( __FILE__ ) );
 require_once GEO_OPTIMIZER_PATH . 'includes/class-schema-manager.php';
 require_once GEO_OPTIMIZER_PATH . 'includes/class-llms-txt.php';
 require_once GEO_OPTIMIZER_PATH . 'includes/class-geo-score.php';
+require_once GEO_OPTIMIZER_PATH . 'includes/class-api-manager.php';
+require_once GEO_OPTIMIZER_PATH . 'includes/class-faq-generator.php';
+require_once GEO_OPTIMIZER_PATH . 'includes/class-citation-score.php';
 require_once GEO_OPTIMIZER_PATH . 'admin/class-admin.php';
 require_once GEO_OPTIMIZER_PATH . 'admin/class-settings-page.php';
+require_once GEO_OPTIMIZER_PATH . 'admin/class-pro-settings.php';
+
+/**
+ * Check whether Pro features are available (API key is set).
+ */
+function geo_is_pro(): bool {
+	return GEO_Optimizer\API_Manager::has_api_key();
+}
+
+define( 'GEORANK_PRO', geo_is_pro() );
 
 /**
  * Boot the plugin after all plugins are loaded.
@@ -49,6 +62,9 @@ function geo_optimizer_init(): void {
 
 		$settings_page = new GEO_Optimizer\Settings_Page();
 		$settings_page->register();
+
+		$pro_settings = new GEO_Optimizer\Pro_Settings();
+		$pro_settings->register();
 
 		$admin = new GEO_Optimizer\Admin();
 		$admin->register();

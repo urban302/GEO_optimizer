@@ -391,7 +391,7 @@ class Settings_Page {
 		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- read-only tab switch.
 		$active_tab = isset( $_GET['tab'] ) ? sanitize_key( $_GET['tab'] ) : 'organization';
 
-		if ( ! in_array( $active_tab, [ 'organization', 'address' ], true ) ) {
+		if ( ! in_array( $active_tab, [ 'organization', 'address', 'pro' ], true ) ) {
 			$active_tab = 'organization';
 		}
 
@@ -408,22 +408,37 @@ class Settings_Page {
 				   class="nav-tab <?php echo 'address' === $active_tab ? 'nav-tab-active' : ''; ?>">
 					<?php esc_html_e( 'Adres', 'geo-optimizer' ); ?>
 				</a>
+				<a href="<?php echo esc_url( admin_url( 'options-general.php?page=' . self::PAGE_SLUG . '&tab=pro' ) ); ?>"
+				   class="nav-tab <?php echo 'pro' === $active_tab ? 'nav-tab-active' : ''; ?>">
+					<?php esc_html_e( 'Pro / AI', 'geo-optimizer' ); ?>
+				</a>
 			</nav>
 
-			<form method="post" action="options.php">
-				<?php
-				settings_fields( self::OPTION_GROUP );
-				wp_nonce_field( self::NONCE_ACTION, '_geo_optimizer_nonce' );
+			<?php if ( 'pro' === $active_tab ) : ?>
+				<form method="post" action="options.php">
+					<?php
+					settings_fields( 'geo_optimizer_pro' );
+					wp_nonce_field( self::NONCE_ACTION, '_geo_optimizer_nonce' );
+					Pro_Settings::render_tab();
+					submit_button( __( 'Instellingen opslaan', 'geo-optimizer' ) );
+					?>
+				</form>
+			<?php else : ?>
+				<form method="post" action="options.php">
+					<?php
+					settings_fields( self::OPTION_GROUP );
+					wp_nonce_field( self::NONCE_ACTION, '_geo_optimizer_nonce' );
 
-				if ( 'organization' === $active_tab ) {
-					do_settings_sections( self::PAGE_SLUG . '-organization' );
-				} else {
-					do_settings_sections( self::PAGE_SLUG . '-address' );
-				}
+					if ( 'organization' === $active_tab ) {
+						do_settings_sections( self::PAGE_SLUG . '-organization' );
+					} else {
+						do_settings_sections( self::PAGE_SLUG . '-address' );
+					}
 
-				submit_button( __( 'Instellingen opslaan', 'geo-optimizer' ) );
-				?>
-			</form>
+					submit_button( __( 'Instellingen opslaan', 'geo-optimizer' ) );
+					?>
+				</form>
+			<?php endif; ?>
 		</div>
 		<?php
 	}
