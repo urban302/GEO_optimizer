@@ -32,16 +32,26 @@ class Geo_Score {
 
 	/**
 	 * Register the meta box for posts and pages.
+	 *
+	 * Uses __back_compat_meta_box = false so the box renders inside the
+	 * Gutenberg sidebar instead of only in the classic editor.
 	 */
 	public function add_meta_box(): void {
-		add_meta_box(
-			'geo_optimizer_score',
-			__( 'GEO Score', 'geo-optimizer' ),
-			[ $this, 'render_meta_box' ],
-			[ 'post', 'page' ],
-			'side',
-			'high'
-		);
+		$post_types = [ 'post', 'page' ];
+
+		foreach ( $post_types as $post_type ) {
+			add_meta_box(
+				'geo_optimizer_score',
+				__( 'GEO Score', 'geo-optimizer' ),
+				[ $this, 'render_meta_box' ],
+				$post_type,
+				'side',
+				'high',
+				[
+					'__back_compat_meta_box' => false,
+				]
+			);
+		}
 	}
 
 	/**
@@ -147,12 +157,14 @@ class Geo_Score {
 		$factors = [];
 
 		// 1. Schema markup (max 20).
-		$has_schema   = has_filter( 'geo_optimizer_schemas' ) || $this->content_has_faq( $rendered );
-		$schema_points = $has_schema ? 20 : 0;
-		// Always give points if Schema_Manager is active.
-		if ( class_exists( Schema_Manager::class ) ) {
-			$schema_points = max( $schema_points, 15 );
-		}
+		// Full points if a SEO plugin handles schema, or if FAQ content is present.
+		$seo_active   = Schema_Manager::is_seo_plugin_active();
+		$has_faq      = $this->content_has_faq( $rendered );
+		$schema_points = match ( true ) {
+			$seo_active        => 20,
+			$has_faq           => 20,
+			default            => 15, // Schema_Manager is always loaded.
+		};
 		$factors[] = [
 			'label'  => __( 'Schema Markup', 'geo-optimizer' ),
 			'points' => $schema_points,

@@ -19,16 +19,51 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Schema_Manager {
 
 	/**
-	 * Register the wp_head hook.
+	 * Register hooks.
 	 */
 	public function register(): void {
 		add_action( 'wp_head', [ $this, 'render_schema' ], 1 );
+		add_action( 'admin_notices', [ $this, 'notice_seo_conflict' ] );
+	}
+
+	/**
+	 * Check whether a known SEO plugin that outputs JSON-LD is active.
+	 */
+	public static function is_seo_plugin_active(): bool {
+		return defined( 'RANK_MATH_VERSION' )
+			|| defined( 'WPSEO_VERSION' )
+			|| defined( 'AIOSEO_VERSION' );
+	}
+
+	/**
+	 * Show a warning when a conflicting SEO plugin is detected.
+	 */
+	public function notice_seo_conflict(): void {
+		if ( ! self::is_seo_plugin_active() ) {
+			return;
+		}
+
+		$screen = get_current_screen();
+		if ( ! $screen || ! in_array( $screen->id, [ 'toplevel_page_geo-optimizer', 'settings_page_geo-optimizer-settings' ], true ) ) {
+			return;
+		}
+
+		printf(
+			'<div class="notice notice-warning"><p><strong>%s</strong> %s</p></div>',
+			esc_html__( 'GEO Optimizer:', 'geo-optimizer' ),
+			esc_html__( 'RankMath, Yoast of AIOSEO gedetecteerd. Schema-output is automatisch uitgeschakeld om conflicten te voorkomen. De llms.txt en GEO Score werken normaal.', 'geo-optimizer' )
+		);
 	}
 
 	/**
 	 * Determine which schemas to output and render them.
 	 */
 	public function render_schema(): void {
+		// Skip schema output when a SEO plugin already handles JSON-LD.
+		if ( self::is_seo_plugin_active() ) {
+			return;
+		}
+
 		$schemas = [];
 
 		// Organization schema on every page.
