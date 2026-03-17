@@ -14,6 +14,6 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 // Remove plugin options.
 delete_option( 'geo_optimizer_settings' );
 
-// Remove per-post meta data.
-global $wpdb;
-$wpdb->query( "DELETE FROM {$wpdb->postmeta} WHERE meta_key LIKE '_geo_optimizer_%'" );
+// Remove all post meta added by this plugin without a slow meta_query.
+delete_metadata( 'post', 0, '_geo_optimizer_score', '', true );
+delete_metadata( 'post', 0, '_geo_optimizer_last_checked', '', true );

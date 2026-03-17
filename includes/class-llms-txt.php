@@ -56,7 +56,7 @@ class Llms_Txt {
 		header( 'Content-Type: text/plain; charset=utf-8' );
 		header( 'X-Robots-Tag: noindex' );
 
-		echo $this->build_markdown();
+		echo esc_html( $this->build_markdown() );
 		exit;
 	}
 

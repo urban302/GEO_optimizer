@@ -252,7 +252,7 @@ class Schema_Manager {
 
 		if ( preg_match_all(
 			'/<h[2-3][^>]*>(.+?\?)<\/h[2-3]>\s*(<p[^>]*>.+?<\/p>)/si',
-			apply_filters( 'the_content', $content ),
+			wp_kses_post( $content ),
 			$matches,
 			PREG_SET_ORDER
 		) ) {

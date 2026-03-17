@@ -126,7 +126,7 @@ class Geo_Score {
 	public function ajax_calculate_score(): void {
 		check_ajax_referer( self::NONCE_ACTION, 'nonce' );
 
-		$post_id = (int) ( $_POST['post_id'] ?? 0 );
+		$post_id = isset( $_POST['post_id'] ) ? absint( wp_unslash( $_POST['post_id'] ) ) : 0;
 		$post    = get_post( $post_id );
 
 		if ( ! $post || ! current_user_can( 'edit_post', $post_id ) ) {
@@ -151,7 +151,7 @@ class Geo_Score {
 	 */
 	public function calculate_factors( \WP_Post $post ): array {
 		$content     = $post->post_content;
-		$rendered    = apply_filters( 'the_content', $content );
+		$rendered    = wp_kses_post( $content );
 		$word_count  = str_word_count( wp_strip_all_tags( $rendered ) );
 
 		$factors = [];

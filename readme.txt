@@ -2,37 +2,33 @@
 Contributors: erwinverbeek
 Tags: geo, schema, structured data, ai seo, llms.txt
 Requires at least: 6.0
-Tested up to: 6.7
+Tested up to: 6.9
 Requires PHP: 8.0
 Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Maak je WordPress website vindbaar voor AI-zoekmachines zoals
-ChatGPT, Perplexity en Google AI Overviews.
+Make your WordPress website visible to AI search engines like ChatGPT, Perplexity and Google AI Overviews.
 
 == Description ==
 
-GEO Optimizer helpt je WordPress website optimaliseren voor
-Generative Engine Optimization (GEO) — de nieuwe standaard voor
-zichtbaarheid in AI-zoekmachines zoals ChatGPT Search, Perplexity,
-Google AI Overviews en andere AI-assistenten.
+GEO Optimizer helps you optimize your WordPress website for Generative Engine Optimization (GEO) — the new standard for visibility in AI search engines like ChatGPT Search, Perplexity, Google AI Overviews and other AI assistants.
 
 Traditionele SEO zorgt dat je gevonden wordt in Google. GEO zorgt
 dat AI-systemen jouw content begrijpen, citeren en aanbevelen.
 
-= Wat doet de plugin? =
+= What does the plugin do? =
 
 **Schema markup generator**
-Genereert automatisch JSON-LD schema markup voor al je pagina's en
-posts. Ondersteunt Article, BlogPosting, FAQPage, Organization en
-WebPage schema. Werkt naast RankMath en Yoast SEO.
+Automatically generates JSON-LD schema markup for all your pages and
+posts. Supports Article, BlogPosting, FAQPage, Organization and
+WebPage schema. Works alongside RankMath and Yoast SEO.
 
 **llms.txt generator**
-Genereert automatisch een /llms.txt bestand — de nieuwe standaard
-waarmee AI-crawlers zoals ChatGPT en Perplexity jouw site begrijpen.
-Bevat alle pagina's, posts en meta-omschrijvingen in AI-leesbaar
-Markdown formaat.
+Automatically generates a /llms.txt file — the new standard
+that allows AI crawlers like ChatGPT and Perplexity to understand your site.
+Contains all pages, posts and meta descriptions in AI-readable
+Markdown format.
 
 **GEO Score per pagina**
 Toont een score van 0-100 per pagina in de WordPress editor,
@@ -45,15 +41,15 @@ Stel je organisatie, social media profielen en adresgegevens in.
 De plugin gebruikt deze data voor consistente entity markup
 door je hele site.
 
-= Waarom GEO? =
+= Why GEO? =
 
-Meer dan 30% van de informatiezoekopdrachten eindigt nu bij een
-AI-antwoord in plaats van een traditionele zoekresultatenpage.
-Websites die niet GEO-geoptimaliseerd zijn missen deze zichtbaarheid
-volledig. GEO Optimizer is de eerste WordPress plugin die zich
-uitsluitend richt op AI-zoekmachine optimalisatie.
+More than 30% of informational search queries now end at an
+AI answer instead of a traditional search results page.
+Websites that are not GEO-optimized miss this visibility entirely.
+GEO Optimizer is the first WordPress plugin focused exclusively
+on AI search engine optimization.
 
-= Werkt samen met =
+= Works with =
 
 * RankMath SEO
 * Yoast SEO
@@ -61,11 +57,11 @@ uitsluitend richt op AI-zoekmachine optimalisatie.
 * Gutenberg editor
 * Classic editor
 
-= Over de ontwikkelaar =
+= About the developer =
 
-GEO Optimizer is ontwikkeld door Erwin Verbeek, SEO-specialist met
-20+ jaar ervaring en expert in GEO en AI-gedreven zoekmachine
-optimalisatie. Meer informatie op
+GEO Optimizer was developed by Erwin Verbeek, SEO specialist with
+20+ years of experience and expert in GEO and AI-driven search engine
+optimization. More information at
 [erwinverbeek.nl/geo-optimizer](https://www.erwinverbeek.nl/geo-optimizer/).
 
 == Installation ==
@@ -121,7 +117,7 @@ gegenereerd op basis van core/details blokken in Gutenberg.
 == Changelog ==
 
 = 1.0.0 =
-* Eerste release
+* Initial release
 * Schema markup generator (Article, FAQPage, Organization, WebPage)
 * llms.txt generator
 * GEO Score meta box (0-100 per pagina)
@@ -131,4 +127,4 @@ gegenereerd op basis van core/details blokken in Gutenberg.
 == Upgrade Notice ==
 
 = 1.0.0 =
-Eerste release van GEO Optimizer.
+Initial release van GEO Optimizer.
