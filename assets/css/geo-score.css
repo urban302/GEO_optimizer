@@ -1,0 +1,78 @@
+.geo-score-wrap {
+	text-align: center;
+}
+
+.geo-score-total {
+	margin-bottom: 12px;
+}
+
+.geo-score-number {
+	font-size: 36px;
+	font-weight: 700;
+	line-height: 1;
+}
+
+.geo-score-label {
+	font-size: 14px;
+	color: #666;
+}
+
+.geo-score--green {
+	color: #46b450;
+}
+
+.geo-score--orange {
+	color: #ffb900;
+}
+
+.geo-score--red {
+	color: #dc3232;
+}
+
+.geo-score-factors {
+	list-style: none;
+	margin: 0 0 12px;
+	padding: 0;
+	text-align: left;
+}
+
+.geo-factor {
+	display: flex;
+	align-items: center;
+	padding: 4px 0;
+	font-size: 13px;
+	border-bottom: 1px solid #f0f0f0;
+}
+
+.geo-factor:last-child {
+	border-bottom: none;
+}
+
+.geo-factor-indicator {
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	flex-shrink: 0;
+	margin-right: 8px;
+}
+
+.geo-factor--green .geo-factor-indicator {
+	background-color: #46b450;
+}
+
+.geo-factor--orange .geo-factor-indicator {
+	background-color: #ffb900;
+}
+
+.geo-factor--red .geo-factor-indicator {
+	background-color: #dc3232;
+}
+
+.geo-factor-label {
+	flex: 1;
+}
+
+.geo-factor-points {
+	font-weight: 600;
+	color: #555;
+}

@@ -1,0 +1,72 @@
+<?php
+/**
+ * Plugin Name: GEO Optimizer
+ * Plugin URI:  https://example.com/geo-optimizer
+ * Description: Generative Engine Optimization — optimize your WordPress content for AI-powered search engines.
+ * Version:     1.0.0
+ * Requires PHP: 8.0
+ * Author:      GEO Optimizer
+ * Author URI:  https://example.com
+ * License:     GPL-2.0-or-later
+ * License URI: https://www.gnu.org/licenses/gpl-2.0.html
+ * Text Domain: geo-optimizer
+ * Domain Path: /languages
+ */
+
+declare(strict_types=1);
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+// Plugin constants.
+define( 'GEO_OPTIMIZER_VERSION', '1.0.0' );
+define( 'GEO_OPTIMIZER_FILE', __FILE__ );
+define( 'GEO_OPTIMIZER_PATH', plugin_dir_path( __FILE__ ) );
+define( 'GEO_OPTIMIZER_URL', plugin_dir_url( __FILE__ ) );
+define( 'GEO_OPTIMIZER_BASENAME', plugin_basename( __FILE__ ) );
+
+// Autoload classes.
+require_once GEO_OPTIMIZER_PATH . 'includes/class-schema-manager.php';
+require_once GEO_OPTIMIZER_PATH . 'includes/class-llms-txt.php';
+require_once GEO_OPTIMIZER_PATH . 'includes/class-geo-score.php';
+require_once GEO_OPTIMIZER_PATH . 'admin/class-admin.php';
+
+/**
+ * Boot the plugin after all plugins are loaded.
+ */
+function geo_optimizer_init(): void {
+	$schema_manager = new GEO_Optimizer\Schema_Manager();
+	$schema_manager->register();
+
+	$llms_txt = new GEO_Optimizer\Llms_Txt();
+	$llms_txt->register();
+
+	if ( is_admin() ) {
+		$geo_score = new GEO_Optimizer\Geo_Score();
+		$geo_score->register();
+
+		$admin = new GEO_Optimizer\Admin();
+		$admin->register();
+	}
+}
+add_action( 'plugins_loaded', 'geo_optimizer_init' );
+
+/**
+ * Activation hook.
+ */
+function geo_optimizer_activate(): void {
+	// Flush rewrite rules so /llms.txt works immediately.
+	$llms_txt = new GEO_Optimizer\Llms_Txt();
+	$llms_txt->add_rewrite_rules();
+	flush_rewrite_rules();
+}
+register_activation_hook( __FILE__, 'geo_optimizer_activate' );
+
+/**
+ * Deactivation hook.
+ */
+function geo_optimizer_deactivate(): void {
+	flush_rewrite_rules();
+}
+register_deactivation_hook( __FILE__, 'geo_optimizer_deactivate' );
