@@ -16,7 +16,7 @@ ChatGPT, Perplexity en Google AI Overviews.
 GEO Optimizer helpt je WordPress website optimaliseren voor
 Generative Engine Optimization (GEO) — de nieuwe standaard voor
 zichtbaarheid in AI-zoekmachines zoals ChatGPT Search, Perplexity,
-Google AI Overviews en Claude.
+Google AI Overviews en andere AI-assistenten.
 
 Traditionele SEO zorgt dat je gevonden wordt in Google. GEO zorgt
 dat AI-systemen jouw content begrijpen, citeren en aanbevelen.
@@ -101,7 +101,7 @@ citeren en aanbevelen in hun antwoorden.
 = Heeft de plugin een Pro versie? =
 
 Ja. GEO Optimizer Pro bevat AI-powered content analyse via de
-Claude API, automatische FAQ suggesties, citeer-score per pagina
+AI-powered content analyse, automatische FAQ suggesties, citeer-score per pagina
 en competitor gap analyse. Meer informatie op
 erwinverbeek.nl/geo-optimizer/
 
