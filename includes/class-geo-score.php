@@ -42,7 +42,7 @@ class Geo_Score {
 		foreach ( $post_types as $post_type ) {
 			add_meta_box(
 				'geo_optimizer_score',
-				__( 'GEO Score', 'geo-optimizer' ),
+				__( 'GEO Score', 'georank' ),
 				[ $this, 'render_meta_box' ],
 				$post_type,
 				'side',
@@ -114,7 +114,7 @@ class Geo_Score {
 			</ul>
 
 			<button type="button" class="button button-small" id="geo-score-refresh">
-				<?php esc_html_e( 'Recalculate', 'geo-optimizer' ); ?>
+				<?php esc_html_e( 'Recalculate', 'georank' ); ?>
 			</button>
 		</div>
 		<?php
@@ -166,7 +166,7 @@ class Geo_Score {
 			default            => 15, // Schema_Manager is always loaded.
 		};
 		$factors[] = [
-			'label'  => __( 'Schema Markup', 'geo-optimizer' ),
+			'label'  => __( 'Schema Markup', 'georank' ),
 			'points' => $schema_points,
 			'max'    => 20,
 			'status' => $this->point_status( $schema_points, 20 ),
@@ -180,7 +180,7 @@ class Geo_Score {
 			default         => 0,
 		};
 		$factors[] = [
-			'label'  => __( 'FAQ Blocks', 'geo-optimizer' ),
+			'label'  => __( 'FAQ Blocks', 'georank' ),
 			'points' => $faq_points,
 			'max'    => 20,
 			'status' => $this->point_status( $faq_points, 20 ),
@@ -191,7 +191,7 @@ class Geo_Score {
 		$has_bio      = (bool) get_the_author_meta( 'description', $author_id );
 		$author_points = $has_bio ? 20 : 5;
 		$factors[]    = [
-			'label'  => __( 'Author Info', 'geo-optimizer' ),
+			'label'  => __( 'Author Info', 'georank' ),
 			'points' => $author_points,
 			'max'    => 20,
 			'status' => $this->point_status( $author_points, 20 ),
@@ -206,7 +206,7 @@ class Geo_Score {
 			default              => 0,
 		};
 		$factors[] = [
-			'label'  => __( 'Internal Links', 'geo-optimizer' ),
+			'label'  => __( 'Internal Links', 'georank' ),
 			'points' => $link_points,
 			'max'    => 20,
 			'status' => $this->point_status( $link_points, 20 ),
@@ -220,7 +220,7 @@ class Geo_Score {
 			default             => 3,
 		};
 		$factors[] = [
-			'label'  => __( 'Content Length', 'geo-optimizer' ),
+			'label'  => __( 'Content Length', 'georank' ),
 			'points' => $length_points,
 			'max'    => 20,
 			'status' => $this->point_status( $length_points, 20 ),

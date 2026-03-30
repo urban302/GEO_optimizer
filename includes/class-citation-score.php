@@ -57,7 +57,7 @@ class Citation_Score {
 			if ( isset( $result['raw'] ) ) {
 				return new \WP_Error(
 					'geo_optimizer_citation_parse',
-					__( 'Kon geen citeer-score berekenen uit het AI antwoord.', 'geo-optimizer' )
+					__( 'Could not calculate citation score from the AI response.', 'georank' )
 				);
 			}
 		}

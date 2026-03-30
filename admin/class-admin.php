@@ -31,10 +31,10 @@ class Admin {
 	 */
 	public function add_menu_page(): void {
 		add_menu_page(
-			__( 'GEO Optimizer', 'geo-optimizer' ),
-			__( 'GEO Optimizer', 'geo-optimizer' ),
+			__( 'GEORank', 'georank' ),
+			__( 'GEORank', 'georank' ),
 			'manage_options',
-			'geo-optimizer',
+			'georank',
 			[ $this, 'render_dashboard' ],
 			'dashicons-chart-area',
 			80
@@ -49,7 +49,7 @@ class Admin {
 	 */
 	public function add_settings_link( array $links ): array {
 		$url  = admin_url( 'options-general.php?page=geo-optimizer-settings' );
-		$link = '<a href="' . esc_url( $url ) . '">' . __( 'Instellingen', 'geo-optimizer' ) . '</a>';
+		$link = '<a href="' . esc_url( $url ) . '">' . __( 'Settings', 'georank' ) . '</a>';
 		array_unshift( $links, $link );
 		return $links;
 	}

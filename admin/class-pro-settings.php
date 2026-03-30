@@ -51,7 +51,7 @@ class Pro_Settings {
 		check_ajax_referer( self::NONCE_VALIDATE, '_nonce' );
 
 		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_send_json_error( __( 'Onvoldoende rechten.', 'geo-optimizer' ) );
+			wp_send_json_error( __( 'Insufficient permissions.', 'georank' ) );
 		}
 
 		$result = API_Manager::validate_api_key();
@@ -60,7 +60,7 @@ class Pro_Settings {
 			wp_send_json_error( $result->get_error_message() );
 		}
 
-		wp_send_json_success( __( 'API key is geldig!', 'geo-optimizer' ) );
+		wp_send_json_success( __( 'API key is valid!', 'georank' ) );
 	}
 
 	/**
@@ -74,10 +74,10 @@ class Pro_Settings {
 		<?php if ( ! $has_key ) : ?>
 			<div class="notice notice-info inline" style="margin:20px 0">
 				<p>
-					<strong><?php esc_html_e( 'Upgrade naar Pro', 'geo-optimizer' ); ?></strong><br>
-					<?php esc_html_e( 'Ontgrendel AI-powered content analyse, automatische FAQ suggesties en citeer-scores.', 'geo-optimizer' ); ?>
+					<strong><?php esc_html_e( 'Upgrade to Pro', 'georank' ); ?></strong><br>
+					<?php esc_html_e( 'Unlock AI-powered content analysis, automatic FAQ suggestions and citation scores.', 'georank' ); ?>
 					<a href="https://www.erwinverbeek.nl/geo-optimizer/" target="_blank" rel="noopener">
-						<?php esc_html_e( 'Meer informatie &rarr;', 'geo-optimizer' ); ?>
+						<?php esc_html_e( 'Learn more &rarr;', 'georank' ); ?>
 					</a>
 				</p>
 			</div>
@@ -86,7 +86,7 @@ class Pro_Settings {
 		<table class="form-table" role="presentation">
 			<tr>
 				<th scope="row">
-					<label for="georank_api_key"><?php esc_html_e( 'API Key', 'geo-optimizer' ); ?></label>
+					<label for="georank_api_key"><?php esc_html_e( 'API Key', 'georank' ); ?></label>
 				</th>
 				<td>
 					<input type="password"
@@ -99,26 +99,26 @@ class Pro_Settings {
 							id="geo-validate-key"
 							class="button button-secondary"
 							data-nonce="<?php echo esc_attr( wp_create_nonce( self::NONCE_VALIDATE ) ); ?>">
-						<?php esc_html_e( 'Valideer API key', 'geo-optimizer' ); ?>
+						<?php esc_html_e( 'Validate API Key', 'georank' ); ?>
 					</button>
 					<span id="geo-key-status" style="margin-left:8px"></span>
 				</td>
 			</tr>
 		</table>
 
-		<h3><?php esc_html_e( 'Pro features', 'geo-optimizer' ); ?></h3>
+		<h3><?php esc_html_e( 'Pro features', 'georank' ); ?></h3>
 		<table class="widefat striped" style="max-width:600px">
 			<tbody>
 				<tr>
-					<td><?php esc_html_e( 'AI Content Analyse', 'geo-optimizer' ); ?></td>
+					<td><?php esc_html_e( 'AI Content Analysis', 'georank' ); ?></td>
 					<td><?php self::render_status_badge( $has_key ); ?></td>
 				</tr>
 				<tr>
-					<td><?php esc_html_e( 'FAQ Generator', 'geo-optimizer' ); ?></td>
+					<td><?php esc_html_e( 'FAQ Generator', 'georank' ); ?></td>
 					<td><?php self::render_status_badge( $has_key ); ?></td>
 				</tr>
 				<tr>
-					<td><?php esc_html_e( 'Citeer-score', 'geo-optimizer' ); ?></td>
+					<td><?php esc_html_e( 'Citation Score', 'georank' ); ?></td>
 					<td><?php self::render_status_badge( $has_key ); ?></td>
 				</tr>
 			</tbody>
@@ -130,7 +130,7 @@ class Pro_Settings {
 			var status = document.getElementById('geo-key-status');
 			if (!btn) return;
 			btn.addEventListener('click', function(){
-				status.textContent = '<?php echo esc_js( __( 'Bezig met valideren...', 'geo-optimizer' ) ); ?>';
+				status.textContent = '<?php echo esc_js( __( 'Validating...', 'georank' ) ); ?>';
 				status.style.color = '#666';
 				var xhr = new XMLHttpRequest();
 				xhr.open('POST', ajaxurl);
@@ -146,7 +146,7 @@ class Pro_Settings {
 					}
 				};
 				xhr.onerror = function(){
-					status.textContent = '<?php echo esc_js( __( 'Netwerkfout.', 'geo-optimizer' ) ); ?>';
+					status.textContent = '<?php echo esc_js( __( 'Network error.', 'georank' ) ); ?>';
 					status.style.color = '#dc3232';
 				};
 				xhr.send('action=geo_optimizer_validate_key&_nonce=' + encodeURIComponent(btn.dataset.nonce));
@@ -164,12 +164,12 @@ class Pro_Settings {
 		if ( $active ) {
 			printf(
 				'<span class="dashicons dashicons-yes-alt" style="color:#46b450"></span> %s',
-				esc_html__( 'Actief', 'geo-optimizer' )
+				esc_html__( 'Active', 'georank' )
 			);
 		} else {
 			printf(
 				'<span class="dashicons dashicons-marker" style="color:#ccc"></span> %s',
-				esc_html__( 'Inactief — API key vereist', 'geo-optimizer' )
+				esc_html__( 'Inactive — API key required', 'georank' )
 			);
 		}
 	}

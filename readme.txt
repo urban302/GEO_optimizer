@@ -12,42 +12,27 @@ Make your WordPress website visible to AI search engines like ChatGPT, Perplexit
 
 == Description ==
 
-GEORank helps you optimize your WordPress website for Generative Engine Optimization (GEO) — the new standard for visibility in AI search engines like ChatGPT Search, Perplexity, Google AI Overviews and other AI assistants.
+GEORank helps you optimize your WordPress website for Generative Engine Optimization (GEO) — improving visibility in AI search engines like ChatGPT Search, Perplexity, Google AI Overviews and other AI assistants.
 
-Traditionele SEO zorgt dat je gevonden wordt in Google. GEO zorgt
-dat AI-systemen jouw content begrijpen, citeren en aanbevelen.
+Traditional SEO helps you get found in Google. GEO helps AI systems understand, cite and recommend your content.
 
 = What does the plugin do? =
 
 **Schema markup generator**
-Automatically generates JSON-LD schema markup for all your pages and
-posts. Supports Article, BlogPosting, FAQPage, Organization and
-WebPage schema. Works alongside RankMath and Yoast SEO.
+Automatically generates JSON-LD schema markup for all your pages and posts. Supports Article, BlogPosting, FAQPage, Organization and WebPage schema. Works alongside RankMath and Yoast SEO.
 
 **llms.txt generator**
-Automatically generates a /llms.txt file — the new standard
-that allows AI crawlers like ChatGPT and Perplexity to understand your site.
-Contains all pages, posts and meta descriptions in AI-readable
-Markdown format.
+Automatically generates a /llms.txt file — a standard that allows AI crawlers like ChatGPT and Perplexity to understand your site. Contains all pages, posts and meta descriptions in AI-readable Markdown format.
 
-**GEO Score per pagina**
-Toont een score van 0-100 per pagina in de WordPress editor,
-gebaseerd op aanwezigheid van schema markup, FAQ blokken,
-auteursinformatie, interne links en content lengte. Inclusief
-groene/oranje/rode indicatoren per factor.
+**GEO Score per page**
+Shows a score from 0-100 per page in the WordPress editor, based on the presence of schema markup, FAQ blocks, author information, internal links and content length. Includes green/orange/red indicators per factor.
 
-**Brand entity configuratie**
-Stel je organisatie, social media profielen en adresgegevens in.
-De plugin gebruikt deze data voor consistente entity markup
-door je hele site.
+**Brand entity configuration**
+Set up your organization, social media profiles and address details. The plugin uses this data for consistent entity markup across your entire site.
 
 = Why GEO? =
 
-More than 30% of informational search queries now end at an
-AI answer instead of a traditional search results page.
-Websites that are not GEO-optimized miss this visibility entirely.
-GEORank is the first WordPress plugin focused exclusively
-on AI search engine optimization.
+A growing share of informational search queries now end at an AI-generated answer instead of a traditional search results page. Websites that are not optimized for AI search engines risk missing out on this visibility. GEORank helps you address this by optimizing your content for AI discovery.
 
 = Works with =
 
@@ -59,60 +44,44 @@ on AI search engine optimization.
 
 = About the developer =
 
-GEORank was developed by Erwin Verbeek, SEO specialist with
-20+ years of experience and expert in GEO and AI-driven search engine
-optimization. More information at
-[erwinverbeek.nl/geo-optimizer](https://www.erwinverbeek.nl/geo-optimizer/).
+GEORank was developed by Erwin Verbeek, SEO specialist with 20+ years of experience and expert in GEO and AI-driven search engine optimization. More information at [erwinverbeek.nl/geo-optimizer](https://www.erwinverbeek.nl/geo-optimizer/).
 
 == Installation ==
 
-1. Upload de `geo-optimizer` map naar `/wp-content/plugins/`
-2. Activeer de plugin via het 'Plugins' menu in WordPress
-3. Ga naar Instellingen > GEORank
-4. Vul je organisatiegegevens in op het tabblad "Organisatie"
-5. Controleer je /llms.txt via jouwsite.nl/llms.txt
+1. Upload the `georank` folder to `/wp-content/plugins/`
+2. Activate the plugin through the 'Plugins' menu in WordPress
+3. Go to Settings > GEORank
+4. Enter your organization details on the "Organization" tab
+5. Check your /llms.txt at yoursite.com/llms.txt
 
 == Frequently Asked Questions ==
 
-= Werkt deze plugin samen met RankMath of Yoast? =
+= Does this plugin work with RankMath or Yoast? =
 
-Yes. GEORank detecteert automatisch of RankMath of Yoast
-actief is. De schema markup output wordt dan uitgeschakeld om
-conflicten te voorkomen. De llms.txt generator en GEO Score
-werken altijd, ongeacht andere SEO plugins.
+Yes. GEORank automatically detects whether RankMath or Yoast is active. Schema markup output is then disabled to prevent conflicts. The llms.txt generator and GEO Score always work, regardless of other SEO plugins.
 
-= Wat is llms.txt? =
+= What is llms.txt? =
 
-llms.txt is een nieuw bestandsformaat (vergelijkbaar met robots.txt)
-waarmee je AI-crawlers vertelt hoe ze jouw website moeten begrijpen.
-ChatGPT, Perplexity en andere AI-systemen gebruiken dit bestand om
-context over jouw site op te bouwen.
+llms.txt is a file format (similar to robots.txt) that tells AI crawlers how to understand your website. ChatGPT, Perplexity and other AI systems use this file to build context about your site.
 
-= Wat is GEO? =
+= What is GEO? =
 
-GEO staat voor Generative Engine Optimization — het optimaliseren
-van content zodat AI-systemen jouw website correct begrijpen,
-citeren en aanbevelen in hun antwoorden.
+GEO stands for Generative Engine Optimization — optimizing content so that AI systems correctly understand, cite and recommend your website in their responses.
 
-= Heeft de plugin een Pro versie? =
+= Does the plugin have a Pro version? =
 
-Ja. GEORank Pro bevat AI-powered content analyse,
-automatische FAQ suggesties, citeer-score per pagina
-en competitor gap analyse. Meer informatie op
-erwinverbeek.nl/geo-optimizer/
+Yes. GEORank Pro includes AI-powered content analysis, automatic FAQ suggestions, citation score per page and competitor gap analysis. More information at erwinverbeek.nl/geo-optimizer/
 
-= Werkt de plugin met de Gutenberg editor? =
+= Does the plugin work with the Gutenberg editor? =
 
-Ja. De GEO Score meta box is zichtbaar in zowel de Gutenberg
-editor als de Classic editor. FAQ schema wordt automatisch
-gegenereerd op basis van core/details blokken in Gutenberg.
+Yes. The GEO Score meta box is visible in both the Gutenberg editor and the Classic editor. FAQ schema is automatically generated based on core/details blocks in Gutenberg.
 
 == Screenshots ==
 
-1. GEO Score meta box in de WordPress editor
-2. JSON-LD schema output in de broncode
-3. llms.txt gegenereerd door de plugin
-4. Settings pagina met organisatie configuratie
+1. GEO Score meta box in the WordPress editor
+2. JSON-LD schema output in the page source
+3. llms.txt generated by the plugin
+4. Settings page with organization configuration
 
 == Changelog ==
 
@@ -120,9 +89,9 @@ gegenereerd op basis van core/details blokken in Gutenberg.
 * Initial release
 * Schema markup generator (Article, FAQPage, Organization, WebPage)
 * llms.txt generator
-* GEO Score meta box (0-100 per pagina)
-* Brand entity configuratie
-* Detectie en compatibiliteit met RankMath en Yoast SEO
+* GEO Score meta box (0-100 per page)
+* Brand entity configuration
+* Detection and compatibility with RankMath and Yoast SEO
 
 == Upgrade Notice ==
 

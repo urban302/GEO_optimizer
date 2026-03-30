@@ -56,7 +56,7 @@ class FAQ_Generator {
 			if ( isset( $result['raw'] ) ) {
 				return new \WP_Error(
 					'geo_optimizer_faq_parse',
-					__( 'Kon geen FAQ items genereren uit het AI antwoord.', 'geo-optimizer' )
+					__( 'Could not generate FAQ items from the AI response.', 'georank' )
 				);
 			}
 		}
@@ -75,7 +75,7 @@ class FAQ_Generator {
 		if ( [] === $faqs ) {
 			return new \WP_Error(
 				'geo_optimizer_faq_empty',
-				__( 'Geen geldige FAQ items ontvangen.', 'geo-optimizer' )
+				__( 'No valid FAQ items received.', 'georank' )
 			);
 		}
 

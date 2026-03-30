@@ -51,7 +51,7 @@ class API_Manager {
 		if ( '' === $api_key ) {
 			return new \WP_Error(
 				'geo_optimizer_no_key',
-				__( 'Geen API key ingesteld.', 'geo-optimizer' )
+				__( 'No API key configured.', 'georank' )
 			);
 		}
 
@@ -81,7 +81,7 @@ class API_Manager {
 
 		if ( $code >= 400 ) {
 			$body    = json_decode( wp_remote_retrieve_body( $response ), true );
-			$message = $body['error']['message'] ?? __( 'Ongeldige API key of server fout.', 'geo-optimizer' );
+			$message = $body['error']['message'] ?? __( 'Invalid API key or server error.', 'georank' );
 			return new \WP_Error( 'geo_optimizer_api_error', sanitize_text_field( $message ) );
 		}
 
@@ -110,7 +110,7 @@ class API_Manager {
 		if ( '' === $api_key ) {
 			return new \WP_Error(
 				'geo_optimizer_no_key',
-				__( 'Geen API key ingesteld.', 'geo-optimizer' )
+				__( 'No API key configured.', 'georank' )
 			);
 		}
 
@@ -150,7 +150,7 @@ class API_Manager {
 
 		if ( $code >= 400 ) {
 			$body    = json_decode( wp_remote_retrieve_body( $response ), true );
-			$message = $body['error']['message'] ?? __( 'API request mislukt.', 'geo-optimizer' );
+			$message = $body['error']['message'] ?? __( 'API request failed.', 'georank' );
 			return new \WP_Error( 'geo_optimizer_api_error', sanitize_text_field( $message ) );
 		}
 
@@ -159,7 +159,7 @@ class API_Manager {
 		if ( ! is_array( $body ) || empty( $body['content'][0]['text'] ) ) {
 			return new \WP_Error(
 				'geo_optimizer_parse_error',
-				__( 'Ongeldig antwoord van AI engine.', 'geo-optimizer' )
+				__( 'Invalid response from AI engine.', 'georank' )
 			);
 		}
 

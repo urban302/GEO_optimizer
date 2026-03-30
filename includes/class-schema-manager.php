@@ -53,8 +53,8 @@ class Schema_Manager {
 
 		printf(
 			'<div class="notice notice-warning"><p><strong>%s</strong> %s</p></div>',
-			esc_html__( 'GEO Optimizer:', 'geo-optimizer' ),
-			esc_html__( 'RankMath, Yoast of AIOSEO gedetecteerd. Schema-output is automatisch uitgeschakeld om conflicten te voorkomen. De llms.txt en GEO Score werken normaal.', 'geo-optimizer' )
+			esc_html__( 'GEORank:', 'georank' ),
+			esc_html__( 'RankMath, Yoast or AIOSEO detected. Schema output has been automatically disabled to prevent conflicts. The llms.txt and GEO Score features continue to work normally.', 'georank' )
 		);
 	}
 

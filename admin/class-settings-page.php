@@ -62,8 +62,8 @@ class Settings_Page {
 	 */
 	public function add_menu(): void {
 		add_options_page(
-			__( 'GEO Optimizer — Instellingen', 'geo-optimizer' ),
-			__( 'GEO Optimizer', 'geo-optimizer' ),
+			__( 'GEORank — Settings', 'georank' ),
+			__( 'GEORank', 'georank' ),
 			'manage_options',
 			self::PAGE_SLUG,
 			[ $this, 'render_page' ]
@@ -95,7 +95,7 @@ class Settings_Page {
 	}
 
 	/**
-	 * Section + fields for the "Organisatie" tab.
+	 * Section + fields for the "Organization" tab.
 	 */
 	private function register_organization_fields(): void {
 		$section = 'geo_optimizer_section_org';
@@ -103,21 +103,21 @@ class Settings_Page {
 
 		add_settings_section(
 			$section,
-			__( 'Organisatie-instellingen', 'geo-optimizer' ),
+			__( 'Organization Settings', 'georank' ),
 			static fn () => printf(
 				'<p>%s</p>',
-				esc_html__( 'Configureer je organisatiegegevens voor structured data.', 'geo-optimizer' )
+				esc_html__( 'Configure your organization details for structured data.', 'georank' )
 			),
 			$page
 		);
 
 		// org_name — text.
-		add_settings_field( 'org_name', __( 'Organisatienaam', 'geo-optimizer' ), [ $this, 'render_text' ], $page, $section, [
+		add_settings_field( 'org_name', __( 'Organization Name', 'georank' ), [ $this, 'render_text' ], $page, $section, [
 			'id' => 'org_name',
 		] );
 
 		// org_type — select.
-		add_settings_field( 'org_type', __( 'Organisatietype', 'geo-optimizer' ), [ $this, 'render_select' ], $page, $section, [
+		add_settings_field( 'org_type', __( 'Organization Type', 'georank' ), [ $this, 'render_select' ], $page, $section, [
 			'id'      => 'org_type',
 			'choices' => [
 				'Organization'  => 'Organization',
@@ -127,34 +127,34 @@ class Settings_Page {
 		] );
 
 		// org_logo — text + media uploader.
-		add_settings_field( 'org_logo', __( 'Logo URL', 'geo-optimizer' ), [ $this, 'render_media' ], $page, $section, [
+		add_settings_field( 'org_logo', __( 'Logo URL', 'georank' ), [ $this, 'render_media' ], $page, $section, [
 			'id' => 'org_logo',
 		] );
 
 		// org_description — textarea.
-		add_settings_field( 'org_description', __( 'Beschrijving', 'geo-optimizer' ), [ $this, 'render_textarea' ], $page, $section, [
+		add_settings_field( 'org_description', __( 'Description', 'georank' ), [ $this, 'render_textarea' ], $page, $section, [
 			'id' => 'org_description',
 		] );
 
 		// Social URLs.
-		add_settings_field( 'social_linkedin', __( 'LinkedIn URL', 'geo-optimizer' ), [ $this, 'render_text' ], $page, $section, [
+		add_settings_field( 'social_linkedin', __( 'LinkedIn URL', 'georank' ), [ $this, 'render_text' ], $page, $section, [
 			'id'   => 'social_linkedin',
 			'type' => 'url',
 		] );
 
-		add_settings_field( 'social_twitter', __( 'Twitter/X URL', 'geo-optimizer' ), [ $this, 'render_text' ], $page, $section, [
+		add_settings_field( 'social_twitter', __( 'Twitter/X URL', 'georank' ), [ $this, 'render_text' ], $page, $section, [
 			'id'   => 'social_twitter',
 			'type' => 'url',
 		] );
 
-		add_settings_field( 'social_facebook', __( 'Facebook URL', 'geo-optimizer' ), [ $this, 'render_text' ], $page, $section, [
+		add_settings_field( 'social_facebook', __( 'Facebook URL', 'georank' ), [ $this, 'render_text' ], $page, $section, [
 			'id'   => 'social_facebook',
 			'type' => 'url',
 		] );
 	}
 
 	/**
-	 * Section + fields for the "Adres" tab.
+	 * Section + fields for the "Address" tab.
 	 */
 	private function register_address_fields(): void {
 		$section = 'geo_optimizer_section_addr';
@@ -162,35 +162,35 @@ class Settings_Page {
 
 		add_settings_section(
 			$section,
-			__( 'Adresinstellingen', 'geo-optimizer' ),
+			__( 'Address Settings', 'georank' ),
 			static fn () => printf(
 				'<p>%s</p>',
-				esc_html__( 'Voeg adresgegevens toe voor LocalBusiness schema.', 'geo-optimizer' )
+				esc_html__( 'Add address details for LocalBusiness schema.', 'georank' )
 			),
 			$page
 		);
 
-		add_settings_field( 'address_street', __( 'Straat + huisnummer', 'geo-optimizer' ), [ $this, 'render_text' ], $page, $section, [
+		add_settings_field( 'address_street', __( 'Street + Number', 'georank' ), [ $this, 'render_text' ], $page, $section, [
 			'id' => 'address_street',
 		] );
 
-		add_settings_field( 'address_city', __( 'Stad', 'geo-optimizer' ), [ $this, 'render_text' ], $page, $section, [
+		add_settings_field( 'address_city', __( 'City', 'georank' ), [ $this, 'render_text' ], $page, $section, [
 			'id' => 'address_city',
 		] );
 
-		add_settings_field( 'address_zip', __( 'Postcode', 'geo-optimizer' ), [ $this, 'render_text' ], $page, $section, [
+		add_settings_field( 'address_zip', __( 'Postal Code', 'georank' ), [ $this, 'render_text' ], $page, $section, [
 			'id' => 'address_zip',
 		] );
 
-		add_settings_field( 'address_country', __( 'Land', 'geo-optimizer' ), [ $this, 'render_select' ], $page, $section, [
+		add_settings_field( 'address_country', __( 'Country', 'georank' ), [ $this, 'render_select' ], $page, $section, [
 			'id'      => 'address_country',
 			'default' => 'NL',
 			'choices' => [
-				'NL' => __( 'Nederland', 'geo-optimizer' ),
-				'BE' => __( 'België', 'geo-optimizer' ),
-				'DE' => __( 'Duitsland', 'geo-optimizer' ),
-				'GB' => __( 'Verenigd Koninkrijk', 'geo-optimizer' ),
-				'US' => __( 'Verenigde Staten', 'geo-optimizer' ),
+				'NL' => __( 'Netherlands', 'georank' ),
+				'BE' => __( 'Belgium', 'georank' ),
+				'DE' => __( 'Germany', 'georank' ),
+				'GB' => __( 'United Kingdom', 'georank' ),
+				'US' => __( 'United States', 'georank' ),
 			],
 		] );
 	}
@@ -321,7 +321,7 @@ class Settings_Page {
 	}
 
 	/**
-	 * URL input with "Selecteer afbeelding" media-library button.
+	 * URL input with "Select Image" media-library button.
 	 *
 	 * @param array{id: string} $args Field arguments.
 	 */
@@ -340,7 +340,7 @@ class Settings_Page {
 		printf(
 			' <button type="button" class="button geo-media-upload" data-target="%s">%s</button>',
 			esc_attr( $id ),
-			esc_html__( 'Selecteer afbeelding', 'geo-optimizer' )
+			esc_html__( 'Select Image', 'georank' )
 		);
 
 		if ( $value ) {
@@ -397,20 +397,20 @@ class Settings_Page {
 
 		?>
 		<div class="wrap">
-			<h1><?php esc_html_e( 'GEO Optimizer — Instellingen', 'geo-optimizer' ); ?></h1>
+			<h1><?php esc_html_e( 'GEORank — Settings', 'georank' ); ?></h1>
 
 			<nav class="nav-tab-wrapper">
 				<a href="<?php echo esc_url( admin_url( 'options-general.php?page=' . self::PAGE_SLUG . '&tab=organization' ) ); ?>"
 				   class="nav-tab <?php echo 'organization' === $active_tab ? 'nav-tab-active' : ''; ?>">
-					<?php esc_html_e( 'Organisatie', 'geo-optimizer' ); ?>
+					<?php esc_html_e( 'Organization', 'georank' ); ?>
 				</a>
 				<a href="<?php echo esc_url( admin_url( 'options-general.php?page=' . self::PAGE_SLUG . '&tab=address' ) ); ?>"
 				   class="nav-tab <?php echo 'address' === $active_tab ? 'nav-tab-active' : ''; ?>">
-					<?php esc_html_e( 'Adres', 'geo-optimizer' ); ?>
+					<?php esc_html_e( 'Address', 'georank' ); ?>
 				</a>
 				<a href="<?php echo esc_url( admin_url( 'options-general.php?page=' . self::PAGE_SLUG . '&tab=pro' ) ); ?>"
 				   class="nav-tab <?php echo 'pro' === $active_tab ? 'nav-tab-active' : ''; ?>">
-					<?php esc_html_e( 'Pro / AI', 'geo-optimizer' ); ?>
+					<?php esc_html_e( 'Pro / AI', 'georank' ); ?>
 				</a>
 			</nav>
 
@@ -420,7 +420,7 @@ class Settings_Page {
 					settings_fields( 'geo_optimizer_pro' );
 					wp_nonce_field( self::NONCE_ACTION, '_geo_optimizer_nonce' );
 					Pro_Settings::render_tab();
-					submit_button( __( 'Instellingen opslaan', 'geo-optimizer' ) );
+					submit_button( __( 'Save Settings', 'georank' ) );
 					?>
 				</form>
 			<?php else : ?>
@@ -435,7 +435,7 @@ class Settings_Page {
 						do_settings_sections( self::PAGE_SLUG . '-address' );
 					}
 
-					submit_button( __( 'Instellingen opslaan', 'geo-optimizer' ) );
+					submit_button( __( 'Save Settings', 'georank' ) );
 					?>
 				</form>
 			<?php endif; ?>
